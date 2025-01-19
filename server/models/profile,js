@@ -1,0 +1,31 @@
+const mongoose = require('mongoose');
+
+const userProfileSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
+    profilePicture: {
+        type: String, // URL or path to the image
+        default: 'defaultProfilePic.jpg' // Default image in case no profile picture is uploaded
+    },
+    bio: {
+        type: String,
+        trim: true,
+        maxLength: 500 // Maximum length for bio
+    },
+    totalCrimesReported: {
+        type: Number,
+        default: 0 // Start at 0 and update as necessary
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const UserProfile = mongoose.model('UserProfile', userProfileSchema);
+
+module.exports = UserProfile;
